@@ -13,5 +13,6 @@
     <modules>
         <module>message-common</module>
         <module>user-service</module>
+        <module>user-common</module>
     </modules>
 </project>
