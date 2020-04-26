@@ -7,6 +7,7 @@ import org.apache.thrift.transport.TSocket;
 import org.apache.thrift.transport.TTransportException;
 import org.springframework.stereotype.Component;
 import xiong.user.UserService;
+import xiong.user.edge.service.annotation.RetryInit;
 
 import javax.annotation.PostConstruct;
 
@@ -15,7 +16,7 @@ public class MessageInvoker {
     UserService.Client client;
 
     @PostConstruct
-    void init() {
+    public void init() {
         try {
             TSocket tSocket = new TSocket("localhost", 9192);
             tSocket.setConnectTimeout(2000);  // 设置连接的超时时间
@@ -32,18 +33,20 @@ public class MessageInvoker {
         client.ping();
     }
 
-    String login(String username, String password) throws TException {
-        try {
-            return client.login(username, password);
-        } catch (TTransportException e) {
-            e.printStackTrace();
-            init();
-            return login(username, password);
-        }
+    @RetryInit
+    public String login(String username, String password) throws TException {
+        return client.login(username, password);
+//        try {
+//            return client.login(username, password);
+//        } catch (TTransportException e) {
+//            e.printStackTrace();
+//            init();
+//            return login(username, password);
+//        }
     }
 
-    String signup(String username, String email, String phone, String password) throws TException {
-        try  {
+    public String signup(String username, String email, String phone, String password) throws TException {
+        try {
             return client.signup(username, email, phone, password);
         } catch (TTransportException e) {
             e.printStackTrace();

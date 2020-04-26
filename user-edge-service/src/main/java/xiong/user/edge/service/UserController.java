@@ -5,6 +5,7 @@ import org.apache.thrift.TException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @Data
@@ -46,4 +47,9 @@ public class UserController {
             return new OutputData<>(400, "username or password is incorrect");
         }
     }
+
+//    @PostMapping("/sendEmailCode")
+//    OutputData<Object> verifyEmail(@RequestParam("email") String email) {
+//
+//    }
 }
