@@ -14,5 +14,6 @@
         <module>message-common</module>
         <module>user-service</module>
         <module>user-common</module>
+        <module>user-edge-service</module>
     </modules>
 </project>

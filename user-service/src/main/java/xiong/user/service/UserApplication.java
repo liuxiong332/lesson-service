@@ -1,7 +1,6 @@
 package xiong.user.service;
 
 import org.apache.thrift.TException;
-import org.apache.thrift.transport.TTransportException;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
@@ -14,7 +13,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class UserApplication implements ApplicationRunner {
 
     @Autowired
-    MessageInvoker messageInvoker;
+    private MessageInvoker messageInvoker;
 
     public static void main(String[] args) {
         SpringApplication.run(UserApplication.class, args);
@@ -32,7 +31,7 @@ public class UserApplication implements ApplicationRunner {
             System.out.println("Send email ");
 
             messageInvoker.sendPhoneMsg("190", "hello");
-            System.out.println("Send phone " );
+            System.out.println("Send phone ");
         } catch (TException e) {
             e.printStackTrace();
         }
