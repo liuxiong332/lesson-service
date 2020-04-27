@@ -15,11 +15,11 @@ public class UserEdgeApplication implements ApplicationRunner {
     }
 
     @Autowired
-    MessageInvoker messageInvoker;
+    UserInvoker userInvoker;
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        messageInvoker.ping();
+        userInvoker.ping();
         System.out.println("Ping");
     }
 }
