@@ -20,16 +20,19 @@ class BaseMessageHandler(MessageService.Iface):
 
 
 if __name__ == "__main__":
-    host = os.getenv("SERVER_HOST") or "localhost"
-    port = os.getenv("SERVER_PORT") or 9090
+    host = os.getenv("SERVER_HOST") or "127.0.0.1"
+    port = os.getenv("SERVER_PORT") or 9191
     processor = MessageService.Processor(BaseMessageHandler())
-    transport = TSocket.TServerSocket(host="127.0.0.1", port=9191)
+    transport = TSocket.TServerSocket(host=host, port=port)
     transport_factory = TTransport.TBufferedTransportFactory()
     protocol_factory = TBinaryProtocol.TBinaryProtocolFactory()
 
-    server = TServer.TSimpleServer(
-        processor, transport, transport_factory, protocol_factory)
+    # server = TServer.TSimpleServer(
+    #     processor, transport, transport_factory, protocol_factory)
 
-    print("Starting the server...")
+    # server = TServer.TThreadedServer(processor, transport, transport_factory, protocol_factory)
+    server = TServer.TThreadPoolServer(processor, transport, transport_factory, protocol_factory)
+
+    print("Starting the server in {}:{}...".format(host, port))
     server.serve()
     print("Done.")

@@ -59,7 +59,7 @@ public class UserController {
 
     private String genVerifyCode(String name) {
         int randomVal = (int) (Math.random() * 1000000);
-        String code = ((Integer) randomVal).toString().substring(0, 6);
+        String code = String.format("%06d", randomVal);
         stringRedisTemplate.opsForValue().set(String.format("%s-code", name), code);
         return code;
     }

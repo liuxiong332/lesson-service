@@ -13,7 +13,7 @@ import javax.annotation.PostConstruct;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-@Configuration
+@Configuration(proxyBeanMethods = false)
 public class RetryConfiguration extends AbstractPointcutAdvisor {
 
     Pointcut pointcut;

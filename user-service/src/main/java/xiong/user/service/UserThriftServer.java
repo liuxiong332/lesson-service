@@ -2,6 +2,7 @@ package xiong.user.service;
 
 import org.apache.thrift.server.TServer;
 import org.apache.thrift.server.TSimpleServer;
+import org.apache.thrift.server.TThreadPoolServer;
 import org.apache.thrift.transport.TServerSocket;
 import org.apache.thrift.transport.TTransportException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,8 @@ public class UserThriftServer implements ApplicationRunner {
             UserService.Processor<UserHandler> processor = new UserService.Processor<>(userHandler);
 
             TServerSocket serverSocket = new TServerSocket(9192);
-            TServer server = new TSimpleServer(new TServer.Args(serverSocket).processor(processor));
+            // TServer server = new TSimpleServer(new TServer.Args(serverSocket).processor(processor));
+            TServer server = new TThreadPoolServer(new TThreadPoolServer.Args(serverSocket).processor(processor));
 
             System.out.println("Starting the simple server...");
             server.serve();
