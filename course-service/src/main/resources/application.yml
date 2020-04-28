@@ -1,0 +1,21 @@
+
+spring:
+  application:
+    name: course-service
+  datasource:
+    url: jdbc:mysql://${MYSQL_HOST:localhost}:${MYSQL_HOST:3306}/lesson_course?serverTimezone=UTC&useLegacyDatetimeCode=false
+    username: root
+    password: 12345678
+
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true #开启驼峰映射
+
+dubbo:
+  scan:
+    base-packages: xiong.course.service
+  protocol:
+    name: dubbo
+    port: 12345
+  registry:
+    address: N/A

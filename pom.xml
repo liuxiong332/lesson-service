@@ -15,5 +15,8 @@
         <module>user-service</module>
         <module>user-common</module>
         <module>user-edge-service</module>
+        <module>course-service</module>
+        <module>course-common</module>
+        <module>course-edge-service</module>
     </modules>
 </project>

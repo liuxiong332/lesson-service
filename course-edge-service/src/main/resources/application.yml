@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: course-edge-service
+
+server:
+  port: 8082

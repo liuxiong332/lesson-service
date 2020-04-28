@@ -1,7 +1,6 @@
-package xiong.user.service;
+package xiong.user.common.service;
 
 import org.apache.thrift.server.TServer;
-import org.apache.thrift.server.TSimpleServer;
 import org.apache.thrift.server.TThreadPoolServer;
 import org.apache.thrift.transport.TServerSocket;
 import org.apache.thrift.transport.TTransportException;
@@ -9,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
-import xiong.user.UserService;
+import xiong.user.common.UserService;
 
 @Component
 public class UserThriftServer implements ApplicationRunner {

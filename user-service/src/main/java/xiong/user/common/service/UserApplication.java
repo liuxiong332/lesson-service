@@ -1,4 +1,4 @@
-package xiong.user.service;
+package xiong.user.common.service;
 
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;

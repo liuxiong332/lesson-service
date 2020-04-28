@@ -1,4 +1,4 @@
-package xiong.user.service;
+package xiong.user.common.service;
 
 import org.apache.thrift.TException;
 import org.apache.thrift.protocol.TBinaryProtocol;

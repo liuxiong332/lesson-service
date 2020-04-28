@@ -6,7 +6,7 @@ import org.apache.thrift.protocol.TProtocol;
 import org.apache.thrift.transport.TSocket;
 import org.apache.thrift.transport.TTransportException;
 import org.springframework.stereotype.Component;
-import xiong.user.UserService;
+import xiong.user.common.UserService;
 import xiong.user.edge.service.annotation.RetryInit;
 
 import javax.annotation.PostConstruct;
