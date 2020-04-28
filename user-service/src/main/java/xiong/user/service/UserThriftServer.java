@@ -1,4 +1,4 @@
-package xiong.user.common.service;
+package xiong.user.service;
 
 import org.apache.thrift.server.TServer;
 import org.apache.thrift.server.TThreadPoolServer;
@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
-import xiong.user.common.UserService;
+import xiong.user.UserService;
 
 @Component
 public class UserThriftServer implements ApplicationRunner {

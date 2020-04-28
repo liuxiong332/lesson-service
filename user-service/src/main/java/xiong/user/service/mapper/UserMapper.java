@@ -1,7 +1,7 @@
-package xiong.user.common.service.mapper;
+package xiong.user.service.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import xiong.user.common.service.entity.User;
+import xiong.user.service.entity.User;
 
 public interface UserMapper extends BaseMapper<User> {
 }
