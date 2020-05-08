@@ -5,6 +5,7 @@ import org.apache.thrift.protocol.TBinaryProtocol;
 import org.apache.thrift.protocol.TProtocol;
 import org.apache.thrift.transport.TSocket;
 import org.apache.thrift.transport.TTransportException;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import xiong.user.UserService;
 import xiong.user.edge.service.annotation.RetryInit;
@@ -15,16 +16,24 @@ import javax.annotation.PostConstruct;
 public class UserInvoker {
     UserService.Client client;
 
+    @Value("${user-service.host}")
+    String userServiceHost;
+
+    @Value("${user-service.port}")
+    int userServicePort;
+
     @PostConstruct
     public void init() {
         try {
-            TSocket tSocket = new TSocket("localhost", 9192);
+            TSocket tSocket = new TSocket(userServiceHost, userServicePort);
             tSocket.setConnectTimeout(2000);  // 设置连接的超时时间
             tSocket.open();
 
             TProtocol protocol = new TBinaryProtocol(tSocket);
             client = new UserService.Client(protocol);
-        } catch (TTransportException e) {
+            client.ping();
+            System.out.println("Connect to user service successfully!");
+        } catch (TException e) {
             e.printStackTrace();
         }
     }

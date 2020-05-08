@@ -1,0 +1,15 @@
+server:
+  port: ${SERVER_PORT:9193}
+
+user-service:
+  host: ${USER_SERVICE_HOST:localhost}
+  port: ${USER_SERVICE_PORT:9192}
+
+message-service:
+  host: ${MESSAGE_SERVICE_HOST:localhost}
+  port: ${MESSAGE_SERVICE_PORT:9191}
+
+spring:
+  redis:
+    host: ${REDIS_HOST:localhost}
+    port: ${REDIS_PORT:6379}

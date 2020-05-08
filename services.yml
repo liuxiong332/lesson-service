@@ -1,0 +1,91 @@
+version: "3.8"
+services:
+  redis:
+    image: "redis:alpine"
+    restart: always
+    networks:
+      - frontend
+    deploy:
+      restart_policy:
+        condition: any
+
+  db:
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    networks:
+      - frontend
+    deploy:
+      restart_policy:
+        condition: any
+    volumes:
+        - mysql-data:/var/lib/mysql
+    environment:
+        MYSQL_ROOT_PASSWORD: 12345678
+        MYSQL_DATABASE: lesson_user
+
+  adminer:
+    image: adminer
+    restart: always
+    networks:
+      - frontend
+    ports:
+      - 8082:8080
+
+  message-service:
+    image: message-service:v1
+    networks:
+      - frontend
+    deploy:
+      replicas: 2
+      resources:
+        limits:
+          cpus: '0.2'
+          memory: 100M
+      restart_policy:
+        condition: any
+
+  user-service:
+    image: user-service:v1
+    environment:
+      MYSQL_HOST: db
+      REDIS_HOST: redis
+      MESSAGE_SERVICE_HOST: message-service
+    ports:
+      - "9192:9192"
+    networks:
+      - frontend
+    deploy:
+      replicas: 2
+      resources:
+        limits:
+          cpus: '0.2'
+          memory: 500M
+      restart_policy:
+        condition: any
+
+  user-edge-service:
+    image: user-edge-service:v1
+    environment:
+      MYSQL_HOST: db
+      REDIS_HOST: redis
+      USER_SERVICE_HOST: user-service
+      MESSAGE_SERVICE_HOST: message-service
+    ports:
+      - "9193:9193"
+    networks:
+      - frontend
+    deploy:
+      replicas: 2
+      resources:
+        limits:
+          cpus: '0.2'
+          memory: 500M
+      restart_policy:
+        condition: any
+
+networks:
+  frontend:
+
+volumes:
+  mysql-data:

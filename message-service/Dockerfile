@@ -10,5 +10,5 @@ COPY --from=build /data/gen_py ./gen_py/
 COPY requirement.txt ./requirement.txt
 RUN pip install -r requirement.txt
 COPY server.py server.py
-ENV SERVER_HOST=localhost SERVER_PORT=9090
+ENV SERVER_HOST=0.0.0.0 SERVER_PORT=9191
 CMD ["python", "-u", "server.py"]

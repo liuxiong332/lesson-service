@@ -5,6 +5,7 @@ import org.apache.thrift.protocol.TBinaryProtocol;
 import org.apache.thrift.protocol.TProtocol;
 import org.apache.thrift.transport.TSocket;
 import org.apache.thrift.transport.TTransportException;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import xiong.message.MessageService;
 
@@ -14,10 +15,16 @@ import javax.annotation.PostConstruct;
 public class MessageInvoker {
     MessageService.Client client;
 
+    @Value("${message-service.host}")
+    private String messageServiceHost;
+
+    @Value("${message-service.port}")
+    private int messageServicePort;
+
     @PostConstruct
     void init() {
         try {
-            TSocket tSocket = new TSocket("localhost", 9191);
+            TSocket tSocket = new TSocket(messageServiceHost, messageServicePort);
             tSocket.setConnectTimeout(2000);  // 设置连接的超时时间
             tSocket.open();
 
